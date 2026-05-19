@@ -30,6 +30,14 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # bash, coreutils, grep, sed, gawk are the bare minimum for the
 # shell to be useful; findutils (find/xargs) and jq cover the
 # next-most-common patterns.
+#
+# python3 + the common data-analysis trio (numpy/pandas/matplotlib)
+# plus openpyxl/Pillow are included because LLM-generated bash
+# scripts overwhelmingly reach for `python3 -c "..."` whenever a
+# task involves arithmetic, parsing, or producing a chart. Apt-managed
+# packages keep the image rebuild fast and the dependency surface
+# stable; scripts that need cutting-edge versions can still target
+# the dedicated python image with `lang: "py"`.
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     bash \
@@ -40,6 +48,12 @@ RUN apt-get update && \
     findutils \
     jq \
     ca-certificates \
+    python3 \
+    python3-numpy \
+    python3-pandas \
+    python3-matplotlib \
+    python3-openpyxl \
+    python3-pil \
     && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
