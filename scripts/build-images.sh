@@ -56,6 +56,7 @@ LANGUAGE_IMAGES=(
     "r.Dockerfile:r:"  # R is really slow to build
     "fortran.Dockerfile:fortran:"
     "d.Dockerfile:d:"
+    "bash.Dockerfile:bash:"
 )
 
 # Infrastructure images with custom contexts
