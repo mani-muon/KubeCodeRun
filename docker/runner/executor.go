@@ -54,6 +54,9 @@ var languages = map[string]LangSpec{
 
 	"d":     {File: "code.d", Args: []string{"sh", "-c", "ldc2 {file} -of=/tmp/code && /tmp/code"}},
 	"dlang": {File: "code.d", Args: []string{"sh", "-c", "ldc2 {file} -of=/tmp/code && /tmp/code"}},
+
+	"bash": {File: "code.sh", Args: []string{"bash", "{file}"}},
+	"sh":   {File: "code.sh", Args: []string{"sh", "{file}"}},
 }
 
 // ExecuteRequest is the JSON request body for POST /execute.

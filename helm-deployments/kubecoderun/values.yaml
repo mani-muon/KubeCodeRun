@@ -286,6 +286,8 @@ execution:
       poolSize: 0
     d:
       poolSize: 0
+    bash:
+      poolSize: 0
 
   # Job settings (for languages with poolSize=0)
   jobs:

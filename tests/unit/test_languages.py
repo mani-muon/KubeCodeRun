@@ -54,9 +54,9 @@ class TestLanguagesRegistry:
     """Tests for LANGUAGES registry."""
 
     def test_all_languages_present(self):
-        """Test all 12 languages are registered."""
-        expected_codes = ["py", "js", "ts", "go", "java", "c", "cpp", "php", "rs", "r", "f90", "d"]
-        assert len(LANGUAGES) == 12
+        """Test all 13 languages are registered."""
+        expected_codes = ["py", "js", "ts", "go", "java", "c", "cpp", "php", "rs", "r", "f90", "d", "bash"]
+        assert len(LANGUAGES) == 13
         for code in expected_codes:
             assert code in LANGUAGES
 
@@ -79,6 +79,15 @@ class TestLanguagesRegistry:
         compiled = ["go", "java", "c", "cpp", "rs", "f90", "d", "ts"]
         for code in compiled:
             assert LANGUAGES[code].uses_stdin is False
+
+    def test_bash_config(self):
+        """Test Bash configuration."""
+        bash = LANGUAGES["bash"]
+        assert bash.name == "Bash"
+        assert bash.file_extension == "sh"
+        assert bash.execution_command == "bash"
+        assert bash.uses_stdin is True
+        assert bash.user_id == 65532
 
 
 class TestGetLanguage:
@@ -109,7 +118,7 @@ class TestGetSupportedLanguages:
         """Test returns list of language codes."""
         languages = get_supported_languages()
         assert isinstance(languages, list)
-        assert len(languages) == 12
+        assert len(languages) == 13
 
     def test_contains_common_languages(self):
         """Test common languages are included."""

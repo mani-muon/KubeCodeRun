@@ -10,6 +10,7 @@ func TestLanguageSpecsExist(t *testing.T) {
 		"py", "python", "js", "javascript", "ts", "typescript",
 		"go", "java", "c", "cpp", "php", "rs", "rust",
 		"r", "f90", "fortran", "d", "dlang",
+		"bash", "sh",
 	}
 	for _, lang := range expected {
 		if _, ok := languages[lang]; !ok {

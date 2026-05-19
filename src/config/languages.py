@@ -164,6 +164,17 @@ LANGUAGES: dict[str, LanguageConfig] = {
         timeout_multiplier=2.0,
         memory_multiplier=1.2,
     ),
+    "bash": LanguageConfig(
+        code="bash",
+        name="Bash",
+        image="bash:latest",
+        user_id=65532,
+        file_extension="sh",
+        execution_command="bash",
+        uses_stdin=True,
+        timeout_multiplier=1.0,
+        memory_multiplier=1.0,
+    ),
 }
 
 

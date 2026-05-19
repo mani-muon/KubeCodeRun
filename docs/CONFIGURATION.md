@@ -356,10 +356,11 @@ Each supported programming language has its own configuration for container imag
 - **R** (`r`): `r-base:latest`
 - **Fortran** (`f90`): `gcc:latest`
 - **D** (`d`): `dlang2/dmd-ubuntu:latest`
+- **Bash** (`bash`): `bash:latest`
 
 ### Custom Language Images
 
-You can override default images using environment variables. The format is `LANG_IMAGE_<CODE>` where `<CODE>` is the language code (py, js, ts, go, java, c, cpp, php, rs, r, f90, d):
+You can override default images using environment variables. The format is `LANG_IMAGE_<CODE>` where `<CODE>` is the language code (py, js, ts, go, java, c, cpp, php, rs, r, f90, d, bash):
 
 ```bash
 LANG_IMAGE_PY=python:3.12-slim

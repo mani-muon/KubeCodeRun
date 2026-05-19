@@ -66,6 +66,7 @@ TEST_CODE[d]='import std.stdio;
 void main() {
     writeln("Hello, KubeCodeRun!");
 }'
+TEST_CODE[bash]='echo "Hello, KubeCodeRun!"'
 
 # Language display names
 declare -A LANG_NAMES
@@ -81,6 +82,7 @@ LANG_NAMES[rs]="Rust"
 LANG_NAMES[r]="R"
 LANG_NAMES[f90]="Fortran"
 LANG_NAMES[d]="D"
+LANG_NAMES[bash]="Bash"
 
 # Image names for each language
 declare -A LANG_IMAGE
@@ -96,6 +98,7 @@ LANG_IMAGE[rs]=rust
 LANG_IMAGE[r]=r
 LANG_IMAGE[f90]=fortran
 LANG_IMAGE[d]=d
+LANG_IMAGE[bash]=bash
 
 usage() {
     head -n 14 "$0" | tail -n 12 | sed 's/^# //'
@@ -307,6 +310,9 @@ test_language() {
         r)
             output=$(run_stdin_test "$full_image" Rscript "$code" /dev/stdin) || exit_code=$?
             ;;
+        bash)
+            output=$(run_stdin_test "$full_image" bash "$code") || exit_code=$?
+            ;;
 
         # TypeScript uses wrapper script
         ts)
@@ -393,7 +399,7 @@ main() {
     if [[ ${#SPECIFIC_LANGS[@]} -gt 0 ]]; then
         langs_to_test=("${SPECIFIC_LANGS[@]}")
     else
-        langs_to_test=(py js ts go java c cpp php rs r f90 d)
+        langs_to_test=(py js ts go java c cpp php rs r f90 d bash)
     fi
 
     local passed=0

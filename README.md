@@ -98,7 +98,7 @@ For a deep dive into the system design, components, and request flows, see [ARCH
 
 The API provides endpoints for code execution, file management, and session state control.
 
-- `POST /exec`: Execute code in one of the 12 supported languages.
+- `POST /exec`: Execute code in one of the 13 supported languages.
 - `POST /upload`: Upload files for processing.
 - `GET /download`: Retrieve generated files.
 
