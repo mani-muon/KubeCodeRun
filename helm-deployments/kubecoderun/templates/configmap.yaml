@@ -74,6 +74,7 @@ data:
   POD_POOL_R: {{ .Values.execution.languages.r.poolSize | quote }}
   POD_POOL_F90: {{ .Values.execution.languages.fortran.poolSize | quote }}
   POD_POOL_D: {{ .Values.execution.languages.d.poolSize | quote }}
+  POD_POOL_BASH: {{ .Values.execution.languages.bash.poolSize | quote }}
 
   # Per-language images
   # Uses full image if specified, otherwise builds from registry-suffix:tag
@@ -106,6 +107,8 @@ data:
   LANG_IMAGE_F90: {{ .Values.execution.languages.fortran.image | default $defaultImage | quote }}
   {{- $defaultImage = printf "%s-%s:%s" $registry "d" $defaultTag }}
   LANG_IMAGE_D: {{ .Values.execution.languages.d.image | default $defaultImage | quote }}
+  {{- $defaultImage = printf "%s-%s:%s" $registry "bash" $defaultTag }}
+  LANG_IMAGE_BASH: {{ .Values.execution.languages.bash.image | default $defaultImage | quote }}
 
   # Per-language resource limits (falls back to execution.resources defaults)
   {{- $defaultCpuLimit := .Values.execution.resources.limits.cpu }}
@@ -243,6 +246,17 @@ data:
   LANG_MEMORY_LIMIT_D: {{ $defaultMemoryLimit | quote }}
   LANG_CPU_REQUEST_D: {{ $defaultCpuRequest | quote }}
   LANG_MEMORY_REQUEST_D: {{ $defaultMemoryRequest | quote }}
+  {{- end }}
+  {{- with .Values.execution.languages.bash.resources }}
+  LANG_CPU_LIMIT_BASH: {{ .limits.cpu | default $defaultCpuLimit | quote }}
+  LANG_MEMORY_LIMIT_BASH: {{ .limits.memory | default $defaultMemoryLimit | quote }}
+  LANG_CPU_REQUEST_BASH: {{ .requests.cpu | default $defaultCpuRequest | quote }}
+  LANG_MEMORY_REQUEST_BASH: {{ .requests.memory | default $defaultMemoryRequest | quote }}
+  {{- else }}
+  LANG_CPU_LIMIT_BASH: {{ $defaultCpuLimit | quote }}
+  LANG_MEMORY_LIMIT_BASH: {{ $defaultMemoryLimit | quote }}
+  LANG_CPU_REQUEST_BASH: {{ $defaultCpuRequest | quote }}
+  LANG_MEMORY_REQUEST_BASH: {{ $defaultMemoryRequest | quote }}
   {{- end }}
 
   # Execution Limits
