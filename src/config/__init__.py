@@ -253,6 +253,7 @@ class Settings(BaseSettings):
     pod_pool_r: int = Field(default=0, ge=0, le=50, description="R pool size")
     pod_pool_f90: int = Field(default=0, ge=0, le=50, description="Fortran pool size")
     pod_pool_d: int = Field(default=0, ge=0, le=50, description="D pool size")
+    pod_pool_bash: int = Field(default=0, ge=0, le=50, description="Bash pool size")
 
     # Pool Optimization Configuration
     pod_pool_parallel_batch: int = Field(
@@ -630,7 +631,7 @@ class Settings(BaseSettings):
         from ..services.kubernetes.models import PoolConfig
 
         configs = []
-        languages = ["py", "js", "ts", "go", "java", "c", "cpp", "php", "rs", "r", "f90", "d"]
+        languages = ["py", "js", "ts", "go", "java", "c", "cpp", "php", "rs", "r", "f90", "d", "bash"]
 
         pool_sizes = {
             "py": self.pod_pool_py,
@@ -645,6 +646,7 @@ class Settings(BaseSettings):
             "r": self.pod_pool_r,
             "f90": self.pod_pool_f90,
             "d": self.pod_pool_d,
+            "bash": self.pod_pool_bash,
         }
 
         for lang in languages:
